@@ -11,7 +11,7 @@ body {
   box-sizing: border-box;
 }
 
-/* ====== 古典背景紋理 ====== */
+/* ====== 古典背景紋理（更精緻） ====== */
 body::before {
   content: '';
   position: fixed;
@@ -21,8 +21,9 @@ body::before {
   height: 100%;
   background-image: 
     radial-gradient(circle at 25% 25%, rgba(191,161,74,0.03) 1px, transparent 1px),
-    radial-gradient(circle at 75% 75%, rgba(191,161,74,0.02) 1px, transparent 1px);
-  background-size: 50px 50px, 100px 100px;
+    radial-gradient(circle at 75% 75%, rgba(191,161,74,0.02) 1px, transparent 1px),
+    linear-gradient(45deg, transparent 48%, rgba(191,161,74,0.01) 50%, transparent 52%);
+  background-size: 50px 50px, 100px 100px, 30px 30px;
   pointer-events: none;
   z-index: -1;
 }
@@ -64,6 +65,29 @@ header::after {
   box-shadow: 0 2px 8px rgba(191,161,74,0.2);
 }
 
+/* ====== Header 角落裝飾 ====== */
+header .corner-decoration {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border: 2px solid #bfa14a;
+  opacity: 0.6;
+}
+
+header .corner-decoration.top-left {
+  top: 10px;
+  left: 10px;
+  border-right: none;
+  border-bottom: none;
+}
+
+header .corner-decoration.top-right {
+  top: 10px;
+  right: 10px;
+  border-left: none;
+  border-bottom: none;
+}
+
 header h1 {
   margin-bottom: 0.5rem;
   font-size: 2.4rem;
@@ -77,10 +101,10 @@ header p {
   margin: 0;
 }
 
-/* ====== Main 內容區塊（古典紙張效果） ====== */
+/* ====== Main 內容區塊（padding 擴大） ====== */
 main {
-  padding: 3rem 2rem 2rem 2rem;
-  max-width: 900px;
+  padding: 4.5rem 3.5rem 3.5rem 3.5rem;
+  max-width: 1100px;
   margin: 0 auto;
   position: relative;
   z-index: 1;
@@ -88,7 +112,6 @@ main {
   box-shadow: 
     0 8px 32px rgba(191,161,74,0.12),
     inset 0 0 0 1px rgba(191,161,74,0.08); /* 內外陰影 */
-  position: relative;
   border-radius: 12px; /* 圓角設計 */
   margin-top: 2rem;
 }
@@ -123,11 +146,17 @@ main::after {
 }
 
 section {
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
   position: relative;
 }
 
-/* ====== 標題設計 ====== */
+/* ====== Section 分隔線裝飾（低調化） ====== */
+section:not(:last-child)::after,
+section:not(:last-child)::before {
+  display: none;
+}
+
+/* ====== 標題設計（精緻裝飾） ====== */
 h2 {
   font-size: 1.5rem;
   font-weight: 700;
@@ -161,6 +190,22 @@ h2::before {
   font-size: 1rem;
 }
 
+/* ====== 標題角落裝飾 ====== */
+h2 .title-decoration {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #bfa14a;
+  opacity: 0.4;
+}
+
+h2 .title-decoration.top-right {
+  top: -5px;
+  right: -10px;
+  border-left: none;
+  border-bottom: none;
+}
+
 /* ====== 專案卡片設計（保留浮動效果） ====== */
 .project {
   background: #fffaf3; /* 更淡的米白色 */
@@ -174,6 +219,8 @@ h2::before {
   position: relative;
   cursor: pointer;
 }
+
+/* ====== 專案卡片角落裝飾 ====== */
 .project::before {
   content: '';
   position: absolute;
@@ -186,12 +233,41 @@ h2::before {
   border-color: transparent #bfa14a transparent transparent; /* 右上角金色裝飾 */
   border-radius: 0 8px 0 0; /* 右上角圓角 */
 }
+
+/* 移除左下角裝飾 */
+/* .project::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 0 18px 18px;
+  border-color: transparent transparent #7c2f2a transparent;
+  border-radius: 0 0 0 8px;
+} */
+
 .project:hover {
   transform: translateY(-3px); /* 保留浮動效果 */
   box-shadow: 0 8px 24px rgba(191,161,74,0.15); /* hover 時陰影加深 */
   border-color: #7c2f2a;
   border-left: 6px solid #3e2723; /* hover 時左框變深棕 */
 }
+
+/* ====== 專案卡片內部裝飾 ====== */
+.project .inner-decoration {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  background: 
+    radial-gradient(circle at 15px 15px, rgba(191,161,74,0.1) 3px, transparent 3px),
+    linear-gradient(45deg, transparent 45%, rgba(191,161,74,0.05) 50%, transparent 55%);
+  pointer-events: none;
+}
+
 .project h3 {
   margin-top: 0;
   margin-bottom: 0.5rem;
@@ -215,13 +291,34 @@ h2::before {
   border: 1px solid #7c2f2a; /* 酒紅邊框點綴 */
   box-shadow: 0 2px 4px rgba(191,161,74,0.2);
   transition: all 0.2s;
+  position: relative;
 }
+
+/* ====== Tag 裝飾效果 ====== */
+.tag::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+
 .tag:hover {
   background: #7c2f2a; /* hover 時酒紅色 */
   color: #fffaf3;
   border-color: #bfa14a; /* hover 時邊框變金色 */
-  transform: translateY(-1px); /* 輕微浮動 */
+  transform: translateY(-1px) scale(1.05); /* 輕微浮動和放大 */
   cursor: pointer;
+}
+
+.tag:hover::before {
+  width: 100%;
+  height: 100%;
 }
 
 /* ====== 列表美化 ====== */
@@ -254,11 +351,29 @@ a {
   font-weight: 500;
   transition: border-bottom 0.18s, color 0.18s;
   border-bottom: 1px dotted #bfa14a;
+  position: relative;
 }
+
+/* ====== 連結裝飾效果 ====== */
+a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #bfa14a;
+  transition: width 0.3s ease;
+}
+
 a:hover {
   color: #3e2723; /* hover 時深棕色 */
   border-bottom: 2px solid #7c2f2a;
   text-decoration: none;
+}
+
+a:hover::after {
+  width: 100%;
 }
 
 /* ====== 聯絡方式字體調整 ====== */
@@ -273,37 +388,23 @@ section:last-child a {
   font-weight: 600;
 }
 
+/* ====== 古典裝飾元素 ====== */
+.classic-ornament {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: 
+    radial-gradient(circle at 20px 20px, #bfa14a 2px, transparent 2px),
+    linear-gradient(45deg, transparent 40%, #bfa14a 40%, #bfa14a 60%, transparent 60%),
+    linear-gradient(-45deg, transparent 40%, #bfa14a 40%, #bfa14a 60%, transparent 60%);
+  opacity: 0.3;
+  pointer-events: none;
+}
+
 /* ====== 響應式設計 ====== */
-@media (max-width: 600px) {
-  body {
-    padding: 0;
-  }
+@media (max-width: 900px) {
   main {
-    padding: 2rem 1rem 1.5rem 1rem;
-    margin: 1rem;
-    border-radius: 8px;
-  }
-  .project {
-    padding: 1rem 0.8rem 0.8rem 0.8rem;
-  }
-  h2 {
-    font-size: 1.2rem;
-    padding-bottom: 0.3rem;
-  }
-  h2::before {
-    display: none; /* 手機版隱藏裝飾符號 */
-  }
-  header h1 {
-    font-size: 1.4rem;
-  }
-  header {
-    padding: 2rem 1rem 1.5rem 1rem;
-  }
-  /* ====== 手機版聯絡方式調整 ====== */
-  section:last-child p {
-    font-size: 1.1rem;
-  }
-  section:last-child a {
-    font-size: 1.1rem;
+    padding: 2rem 0.5rem 1.5rem 0.5rem;
+    max-width: 98vw;
   }
 }
