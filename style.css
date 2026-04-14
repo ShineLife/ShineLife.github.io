@@ -1,410 +1,584 @@
-/* ====== 全域設定與主色調（極簡古典風格） ====== */
-body {
-  font-family: 'Noto Serif TC', 'Times New Roman', 'serif', '微軟正黑體', sans-serif;
-  margin: 0;
-  padding: 0;
-  background: #f8f5e4; /* 仿羊皮紙米白色 */
-  color: #3e2723; /* 深棕色文字 */
-  min-height: 100vh;
-  letter-spacing: 0.5px;
-  position: relative;
+:root {
+  --bg: #f3f5f7;
+  --panel: #ffffff;
+  --panel-soft: #f8fafc;
+  --text: #16202b;
+  --muted: #617182;
+  --line: #d9e1e8;
+  --accent: #1d7a6f;
+  --accent-soft: #e4f3f1;
+  --shadow: 0 18px 48px rgba(22, 32, 43, 0.08);
+}
+
+* {
   box-sizing: border-box;
 }
 
-/* ====== 古典背景紋理（更精緻） ====== */
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: 
-    radial-gradient(circle at 25% 25%, rgba(191,161,74,0.03) 1px, transparent 1px),
-    radial-gradient(circle at 75% 75%, rgba(191,161,74,0.02) 1px, transparent 1px),
-    linear-gradient(45deg, transparent 48%, rgba(191,161,74,0.01) 50%, transparent 52%);
-  background-size: 50px 50px, 100px 100px, 30px 30px;
-  pointer-events: none;
-  z-index: -1;
+html {
+  scroll-behavior: smooth;
 }
 
-/* ====== Header 設計（簡約橫幅） ====== */
-header {
-  background: linear-gradient(135deg, #3e2723 0%, #2d1b17 100%); /* 深棕漸層 */
-  color: #f8f5e4; /* 米白色字體 */
-  padding: 3rem 2rem 2.5rem 2rem;
-  text-align: center;
-  letter-spacing: 2px;
-  font-family: 'Noto Serif TC', 'Times New Roman', serif;
-  position: relative;
-  box-shadow: 0 4px 20px rgba(62,39,35,0.15);
+body {
+  margin: 0;
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, #ffffff 0, #ffffff 12%, transparent 12%),
+    linear-gradient(180deg, #f7f8fa 0%, #eef2f5 100%);
+  line-height: 1.7;
 }
 
-/* ====== Header 古典裝飾 ====== */
-header::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #bfa14a 0%, #d4af6a 50%, #bfa14a 100%); /* 金色漸層頂部 */
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
-header::after {
-  content: '❦'; /* 古典裝飾符號 */
-  position: absolute;
-  bottom: -15px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: #bfa14a;
-  font-size: 2rem;
-  background: #f8f5e4;
-  padding: 0 15px;
-  border-radius: 50%;
-  box-shadow: 0 2px 8px rgba(191,161,74,0.2);
+button {
+  font: inherit;
 }
 
-/* ====== Header 角落裝飾 ====== */
-header .corner-decoration {
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  border: 2px solid #bfa14a;
-  opacity: 0.6;
+[data-lang][hidden] {
+  display: none !important;
 }
 
-header .corner-decoration.top-left {
-  top: 10px;
-  left: 10px;
-  border-right: none;
-  border-bottom: none;
+.page-shell {
+  width: min(1140px, calc(100% - 28px));
+  margin: 18px auto;
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(217, 225, 232, 0.9);
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  backdrop-filter: blur(10px);
 }
 
-header .corner-decoration.top-right {
-  top: 10px;
-  right: 10px;
-  border-left: none;
-  border-bottom: none;
+.hero {
+  padding: 28px 40px 34px;
+  background:
+    linear-gradient(180deg, rgba(29, 122, 111, 0.05), transparent 38%),
+    var(--panel);
+  border-bottom: 1px solid var(--line);
 }
 
-header h1 {
-  margin-bottom: 0.5rem;
-  font-size: 2.4rem;
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 52px;
+}
+
+.brand-lockup {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brand-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-family: "Space Grotesk", sans-serif;
   font-weight: 700;
-  letter-spacing: 3px;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  letter-spacing: 0.06em;
 }
-header p {
-  font-size: 1.1rem;
-  opacity: 0.92;
+
+.brand-name,
+.brand-role {
   margin: 0;
 }
 
-/* ====== Main 內容區塊（padding 擴大） ====== */
+.brand-name {
+  font-weight: 700;
+}
+
+.brand-role {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.language-switch {
+  display: inline-flex;
+  padding: 4px;
+  background: var(--panel-soft);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+}
+
+.lang-button {
+  min-width: 44px;
+  height: 36px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.lang-button.is-active {
+  color: #ffffff;
+  background: var(--accent);
+  font-weight: 700;
+}
+
+.topbar-links {
+  display: flex;
+  gap: 8px;
+}
+
+.topbar-links a {
+  padding: 9px 14px;
+  border-radius: 999px;
+  color: var(--muted);
+  transition: background-color 180ms ease, color 180ms ease;
+}
+
+.topbar-links a:hover {
+  background: var(--panel-soft);
+  color: var(--text);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(300px, 0.9fr);
+  gap: 28px;
+  align-items: start;
+}
+
+.eyebrow,
+.section-kicker,
+.card-label,
+.project-type {
+  margin: 0 0 12px;
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.hero h1,
+.section-heading h2,
+.hero-card h2,
+.summary-lead,
+.panel-header h3,
+.project-card h3 {
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.hero h1 {
+  margin: 0;
+  max-width: 700px;
+  font-size: clamp(2.8rem, 6vw, 4.9rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
+
+.hero-name-zh {
+  margin: 12px 0 0;
+  color: var(--muted);
+  letter-spacing: 0.18em;
+}
+
+.hero-summary {
+  max-width: 720px;
+  margin: 22px 0 0;
+  color: var(--muted);
+  font-size: 1.02rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 20px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-weight: 700;
+  transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+}
+
+.button-primary {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.button-secondary {
+  background: var(--panel-soft);
+  border-color: var(--line);
+}
+
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 0;
+  margin: 24px 0 0;
+  list-style: none;
+}
+
+.hero-meta li {
+  padding: 9px 12px;
+  border-radius: 999px;
+  background: var(--panel-soft);
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.hero-card,
+.surface-card,
+.skill-card,
+.experience-tab,
+.experience-panel,
+.project-card,
+.contact-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+}
+
+.hero-card {
+  padding: 22px;
+}
+
+.hero-stats {
+  display: grid;
+  gap: 12px;
+}
+
+.hero-stat {
+  padding: 16px;
+  border-radius: 18px;
+  background: var(--panel-soft);
+  border: 1px solid var(--line);
+}
+
+.metric-value {
+  display: block;
+  margin-bottom: 4px;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.55rem;
+  line-height: 1;
+}
+
+.metric-label,
+.surface-card p,
+.skill-card p,
+.panel-meta,
+.detail-list,
+.contact-card p {
+  color: var(--muted);
+}
+
 main {
-  padding: 4.5rem 3.5rem 3.5rem 3.5rem;
-  max-width: 1100px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 1;
-  background: #fffaf3; /* 更淡的米白色 */
-  box-shadow: 
-    0 8px 32px rgba(191,161,74,0.12),
-    inset 0 0 0 1px rgba(191,161,74,0.08); /* 內外陰影 */
-  border-radius: 12px; /* 圓角設計 */
-  margin-top: 2rem;
+  padding: 38px 40px 46px;
 }
 
-/* ====== Main 古典裝飾 ====== */
-main::before {
-  content: '';
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  right: 15px;
-  bottom: 15px;
-  border: 1px solid rgba(191,161,74,0.2); /* 內框裝飾 */
-  pointer-events: none;
-  border-radius: 8px; /* 內框圓角 */
+.section + .section {
+  margin-top: 50px;
 }
 
-main::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: 
-    linear-gradient(45deg, transparent 48%, rgba(191,161,74,0.03) 50%, transparent 52%),
-    linear-gradient(-45deg, transparent 48%, rgba(191,161,74,0.03) 50%, transparent 52%);
-  background-size: 20px 20px;
-  pointer-events: none;
-  z-index: -1;
-  border-radius: 12px; /* 背景圓角 */
+.section-heading {
+  margin-bottom: 20px;
 }
 
-section {
-  margin-bottom: 4rem;
-  position: relative;
+.section-heading h2 {
+  margin: 0;
+  font-size: clamp(1.9rem, 4vw, 2.9rem);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
 }
 
-/* ====== Section 分隔線裝飾（低調化） ====== */
-section:not(:last-child)::after,
-section:not(:last-child)::before {
+.summary-grid,
+.skills-grid,
+.background-grid,
+.project-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.summary-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.surface-card,
+.contact-card {
+  padding: 22px;
+}
+
+.summary-lead {
+  margin: 0 0 12px;
+  font-size: 1.28rem;
+  line-height: 1.15;
+  color: var(--text);
+}
+
+.skills-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.skill-card {
+  min-height: 138px;
+  padding: 18px;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.skill-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(22, 32, 43, 0.06);
+}
+
+.skill-card h3,
+.background-grid h3 {
+  margin: 0 0 10px;
+}
+
+.experience-shell {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: 16px;
+}
+
+.experience-tabs {
+  display: grid;
+  gap: 10px;
+}
+
+.experience-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+  padding: 16px 18px;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 180ms ease, background-color 180ms ease, transform 180ms ease;
+}
+
+.experience-tab:hover {
+  transform: translateY(-1px);
+  border-color: #bfd1cf;
+}
+
+.experience-tab.is-active {
+  background: var(--accent-soft);
+  border-color: #bfd1cf;
+}
+
+.experience-tab span {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.experience-tab small {
+  color: var(--muted);
+}
+
+.experience-panel {
+  display: none;
+  padding: 22px;
+}
+
+.experience-panel.is-active {
+  display: block;
+}
+
+.panel-header {
+  margin-bottom: 14px;
+}
+
+.panel-meta {
+  margin: 0 0 6px;
+  font-size: 0.95rem;
+}
+
+.panel-header h3 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.detail-list {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.detail-list li + li {
+  margin-top: 10px;
+}
+
+.detail-list.compact li + li {
+  margin-top: 8px;
+}
+
+.detail-list li {
+  color: var(--text);
+}
+
+.project-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.project-card {
+  padding: 0;
+  overflow: hidden;
+}
+
+.project-card summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 18px 20px;
+}
+
+.project-card summary::-webkit-details-marker {
   display: none;
 }
 
-/* ====== 標題設計（精緻裝飾） ====== */
-h2 {
-  font-size: 1.5rem;
+.project-card summary::after {
+  content: "+";
+  float: right;
+  color: var(--accent);
   font-weight: 700;
-  color: #7c2f2a; /* 酒紅色 */
-  border: none;
-  border-bottom: 2px solid #bfa14a; /* 金色底線 */
-  padding-left: 0;
-  padding-bottom: 0.5rem;
-  margin-bottom: 1.5rem;
-  background: none;
-  position: relative;
-}
-h2::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 40px;
-  height: 2px;
-  background: #7c2f2a; /* 酒紅點綴 */
+  font-size: 1.1rem;
 }
 
-/* ====== 標題古典裝飾 ====== */
-h2::before {
-  content: '◆'; /* 古典菱形符號 */
-  position: absolute;
-  left: -30px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #bfa14a;
-  font-size: 1rem;
+.project-card[open] summary::after {
+  content: "-";
 }
 
-/* ====== 標題角落裝飾 ====== */
-h2 .title-decoration {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  border: 1px solid #bfa14a;
-  opacity: 0.4;
+.project-card h3 {
+  display: inline;
+  margin: 0;
+  font-size: 1.18rem;
 }
 
-h2 .title-decoration.top-right {
-  top: -5px;
-  right: -10px;
-  border-left: none;
-  border-bottom: none;
+.project-card p {
+  margin: 0;
+  padding: 0 20px 20px;
+  color: var(--muted);
 }
 
-/* ====== 專案卡片設計（保留浮動效果） ====== */
-.project {
-  background: #fffaf3; /* 更淡的米白色 */
-  padding: 1.5rem 1.2rem 1.2rem 1.2rem;
-  margin-bottom: 2rem;
-  border-radius: 8px; /* 卡片圓角 */
-  box-shadow: 0 4px 16px rgba(191,161,74,0.08); /* 輕微金色陰影 */
-  border: 1px solid #bfa14a; /* 金色細邊框 */
-  border-left: 6px solid #7c2f2a; /* 酒紅左框 */
-  transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
-  position: relative;
-  cursor: pointer;
+.background-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-/* ====== 專案卡片角落裝飾 ====== */
-.project::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 0 20px 20px 0;
-  border-color: transparent #bfa14a transparent transparent; /* 右上角金色裝飾 */
-  border-radius: 0 8px 0 0; /* 右上角圓角 */
+.edu-name {
+  margin: 0 0 8px;
+  color: var(--text);
+  font-weight: 700;
 }
 
-/* 移除左下角裝飾 */
-/* .project::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 0 0 18px 18px;
-  border-color: transparent transparent #7c2f2a transparent;
-  border-radius: 0 0 0 8px;
-} */
-
-.project:hover {
-  transform: translateY(-3px); /* 保留浮動效果 */
-  box-shadow: 0 8px 24px rgba(191,161,74,0.15); /* hover 時陰影加深 */
-  border-color: #7c2f2a;
-  border-left: 6px solid #3e2723; /* hover 時左框變深棕 */
+.muted {
+  color: var(--muted);
 }
 
-/* ====== 專案卡片內部裝飾 ====== */
-.project .inner-decoration {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 30px;
-  height: 30px;
-  background: 
-    radial-gradient(circle at 15px 15px, rgba(191,161,74,0.1) 3px, transparent 3px),
-    linear-gradient(45deg, transparent 45%, rgba(191,161,74,0.05) 50%, transparent 55%);
-  pointer-events: none;
+.contact-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 1fr);
+  gap: 18px;
+  align-items: center;
 }
 
-.project h3 {
-  margin-top: 0;
-  margin-bottom: 0.5rem;
-  font-size: 1.15rem;
-  color: #3e2723;
-  font-weight: 600;
+.contact-links {
+  display: grid;
+  gap: 10px;
 }
 
-/* ====== 技術標籤 tag（單色極簡） ====== */
-.tag {
-  display: inline-block;
-  background: #bfa14a; /* 金色 tag */
-  color: #eeeeee; /* 白色字體 */
-  padding: 0.2rem 0.8rem;
+.contact-links a {
+  display: inline-flex;
+  width: fit-content;
+  padding: 10px 14px;
   border-radius: 999px;
-  margin-right: 0.5rem;
-  font-size: 0.85rem;
-  font-weight: 500;
-  letter-spacing: 1px;
-  margin-bottom: 0.3rem;
-  border: 1px solid #7c2f2a; /* 酒紅邊框點綴 */
-  box-shadow: 0 2px 4px rgba(191,161,74,0.2);
-  transition: all 0.2s;
-  position: relative;
+  background: var(--panel-soft);
+  border: 1px solid var(--line);
+  transition: background-color 180ms ease, transform 180ms ease;
 }
 
-/* ====== Tag 裝飾效果 ====== */
-.tag::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 0;
-  height: 0;
-  background: rgba(255,255,255,0.2);
-  border-radius: 50%;
-  transition: all 0.3s;
+.contact-links a:hover {
+  background: var(--accent-soft);
+  transform: translateY(-1px);
 }
 
-.tag:hover {
-  background: #7c2f2a; /* hover 時酒紅色 */
-  color: #fffaf3;
-  border-color: #bfa14a; /* hover 時邊框變金色 */
-  transform: translateY(-1px) scale(1.05); /* 輕微浮動和放大 */
-  cursor: pointer;
+@media (max-width: 1080px) {
+  .skills-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .background-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
-.tag:hover::before {
-  width: 100%;
-  height: 100%;
-}
+@media (max-width: 860px) {
+  .page-shell {
+    width: min(100% - 16px, 1000px);
+    margin: 8px auto;
+    border-radius: 22px;
+  }
 
-/* ====== 列表美化 ====== */
-ul {
-  padding-left: 0;
-  margin-top: 0.5rem;
-  list-style: none;
-}
-ul li {
-  margin-bottom: 0.6rem;
-  line-height: 1.7;
-  font-size: 1.05rem;
-  position: relative;
-  padding-left: 1.8rem;
-}
-ul li::before {
-  content: '•';
-  color: #bfa14a; /* 金色項目符號 */
-  font-weight: bold;
-  position: absolute;
-  left: 0;
-  top: 0;
-  font-size: 1.2rem;
-}
-
-/* ====== 連結設計（單色） ====== */
-a {
-  color: #7c2f2a; /* 酒紅色連結 */
-  text-decoration: none;
-  font-weight: 500;
-  transition: border-bottom 0.18s, color 0.18s;
-  border-bottom: 1px dotted #bfa14a;
-  position: relative;
-}
-
-/* ====== 連結裝飾效果 ====== */
-a::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: #bfa14a;
-  transition: width 0.3s ease;
-}
-
-a:hover {
-  color: #3e2723; /* hover 時深棕色 */
-  border-bottom: 2px solid #7c2f2a;
-  text-decoration: none;
-}
-
-a:hover::after {
-  width: 100%;
-}
-
-/* ====== 聯絡方式字體調整 ====== */
-section:last-child p {
-  font-size: 1.2rem;
-  line-height: 1.8;
-  margin-bottom: 1rem;
-}
-
-section:last-child a {
-  font-size: 1.2rem;
-  font-weight: 600;
-}
-
-/* ====== 古典裝飾元素 ====== */
-.classic-ornament {
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  background: 
-    radial-gradient(circle at 20px 20px, #bfa14a 2px, transparent 2px),
-    linear-gradient(45deg, transparent 40%, #bfa14a 40%, #bfa14a 60%, transparent 60%),
-    linear-gradient(-45deg, transparent 40%, #bfa14a 40%, #bfa14a 60%, transparent 60%);
-  opacity: 0.3;
-  pointer-events: none;
-}
-
-/* ====== 響應式設計 ====== */
-@media (max-width: 900px) {
+  .hero,
   main {
-    padding: 2rem 0.5rem 1.5rem 0.5rem;
-    max-width: 98vw;
+    padding: 22px 18px 28px;
+  }
+
+  .topbar {
+    margin-bottom: 34px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .topbar-actions {
+    display: grid;
+    width: 100%;
+  }
+
+  .topbar-links {
+    flex-wrap: wrap;
+  }
+
+  .hero-grid,
+  .summary-grid,
+  .experience-shell,
+  .project-grid,
+  .contact-card {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .skills-grid,
+  .background-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.4rem, 12vw, 4rem);
+  }
+
+  .brand-lockup {
+    align-items: flex-start;
   }
 }
